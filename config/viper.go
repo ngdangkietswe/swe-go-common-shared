@@ -12,7 +12,8 @@ const (
 	EnvLocal = "local"
 )
 
-func init() {
+// Init initializes the configuration
+func Init() {
 	viper.AddConfigPath("./config")
 	viper.SetConfigName("config")
 	viper.SetConfigType("env")
