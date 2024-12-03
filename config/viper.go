@@ -37,7 +37,7 @@ func Init() {
 // Get returns the value of the key if it exists, otherwise it returns the default value
 func Get(key string, defaultValue interface{}) interface{} {
 	if viper.IsSet(key) {
-		switch viper.Get(key).(type) {
+		switch defaultValue.(type) {
 		case int:
 			return viper.GetInt(key)
 		case string:
