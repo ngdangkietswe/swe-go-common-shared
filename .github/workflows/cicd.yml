@@ -1,0 +1,60 @@
+name: Golang CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**/*.md'
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+
+jobs:
+  verify-go-library:
+    name: Verify Go Library
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        go-version: [ '1.22.x', '1.23.x' ]
+
+    env:
+      CACHE_PATHS: |
+        ~/.cache/go-build
+        ~/go/pkg/mod
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Cache Go Modules
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.CACHE_PATHS }}
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Install Dependencies
+        run: |
+          go mod tidy
+          go mod download
+
+      - name: Run Static Analysis
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.52.2
+          golangci-lint run ./...
+
+      - name: Check Code Formatting
+        run: go fmt ./...
+
+      - name: Verify Go Environment
+        run: |
+          go version
+          go env
