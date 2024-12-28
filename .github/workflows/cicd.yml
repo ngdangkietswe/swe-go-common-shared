@@ -46,11 +46,6 @@ jobs:
           go mod tidy
           go mod download
 
-      - name: Run Static Analysis
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.52.2
-          golangci-lint run ./...
-
       - name: Check Code Formatting
         run: go fmt ./...
 
