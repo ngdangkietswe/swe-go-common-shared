@@ -1,6 +1,7 @@
 package config
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/spf13/viper"
 	"log"
@@ -30,7 +31,14 @@ func Init() {
 		if err := viper.ReadInConfig(); err != nil {
 			panic(err)
 		}
-		fmt.Printf("Config loaded in local environment: %v\n", viper.AllSettings())
+		settings := viper.AllSettings()
+
+		jsonOutput, err := json.MarshalIndent(settings, "", "  ")
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Printf("Config loaded in local environment:\n%s\n", jsonOutput)
 	}
 }
 
