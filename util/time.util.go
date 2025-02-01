@@ -1,6 +1,9 @@
 package util
 
-import "time"
+import (
+	"github.com/samber/lo"
+	"time"
+)
 
 const (
 	LayoutISO         = "2006-01-02"
@@ -8,6 +11,6 @@ const (
 )
 
 // Format is a function that formats a time.Time to a string with a given layout.
-func Format(t time.Time, layout string) string {
-	return t.Format(layout)
+func Format(t *time.Time, layout string) string {
+	return lo.Ternary(t == nil, "", t.Format(layout))
 }
