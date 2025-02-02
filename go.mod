@@ -1,10 +1,11 @@
 module github.com/ngdangkietswe/swe-go-common-shared
 
-go 1.22.7
+go 1.23.0
 
-toolchain go1.22.9
+toolchain go1.23.5
 
 require (
+	entgo.io/ent v0.14.1
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/google/uuid v1.6.0
 	github.com/redis/go-redis/v9 v9.7.0
