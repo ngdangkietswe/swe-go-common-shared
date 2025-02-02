@@ -34,6 +34,15 @@ func One2ManyInverse[T any](from string, fromType T, ref, field string) ent.Edge
 		Field(field)
 }
 
+// One2ManyInverseRequired is a helper function to create a one-to-many inverse edge with required field.
+func One2ManyInverseRequired[T any](from string, fromType T, ref, field string) ent.Edge {
+	return edge.From(from, fromType).
+		Ref(ref).
+		Unique().
+		Required().
+		Field(field)
+}
+
 // Many2Many is a helper function to create a many-to-many edge.
 func Many2Many[T any](to string, toType T) ent.Edge {
 	return edge.To(to, toType)
