@@ -45,11 +45,18 @@ jobs:
         run: |
           go mod tidy
           go mod download
-
-      - name: Check Code Formatting
-        run: go fmt ./...
+          go list -m all  # Ensure dependencies are correctly resolved
 
       - name: Verify Go Environment
         run: |
           go version
           go env
+
+      - name: Check Code Formatting
+        run: go fmt ./...
+
+      - name: Run Vet (Static Analysis)
+        run: go vet ./...
+
+      - name: Run Tests
+        run: go test -v ./...
