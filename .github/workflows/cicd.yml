@@ -17,6 +17,10 @@ jobs:
     name: Verify Go Library
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      packages: write
+
     strategy:
       matrix:
         go-version: [ '1.22.x', '1.23.x' ]
