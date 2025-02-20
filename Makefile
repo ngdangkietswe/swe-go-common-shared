@@ -1,2 +1,2 @@
-build:
-	./scripts/build.sh
+update-protobuf:
+	./scripts/update_protobuf.sh

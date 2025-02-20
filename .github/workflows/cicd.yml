@@ -1,6 +1,8 @@
 name: Golang CI/CD Pipeline
 
 on:
+  repository_dispatch:
+    types: [ trigger-swe-go-common-shared ]
   push:
     branches:
       - main
@@ -60,3 +62,24 @@ jobs:
 
       - name: Run Tests
         run: go test -v ./...
+
+      - name: Update protobuf
+        run: |
+          chmod +x ./scripts/update_protobuf.sh
+          ./scripts/update_protobuf.sh
+        shell: bash
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "ngdangkietse"
+          git config --global user.email "kietnguyen17052001@gmail.com"
+          if [ -n "$(git status -s)" ]; then
+            git status
+            git add .
+            git commit -m "chore: regenerate files"
+            git push origin main
+          else
+            echo "No changes to commit"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
