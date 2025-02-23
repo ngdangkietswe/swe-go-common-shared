@@ -1,5 +1,9 @@
-echo "Update protobuf..."
-git clone https://github.com/ngdangkietswe/swe-protobuf-shared.git
-cp -r swe-protobuf-shared/generated/common proto/
-rm -rf swe-protobuf-shared
-echo "Update protobuf successful!"
+#!/bin/bash
+
+set -e  # Exit on any error
+
+echo "Updating common protobuf..."
+GOPROXY=direct go get -u github.com/ngdangkietswe/swe-protobuf-shared/generated/common
+go mod tidy
+go mod vendor
+echo "Successfully updated common protobuf!"

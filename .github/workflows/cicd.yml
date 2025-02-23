@@ -31,56 +31,48 @@ jobs:
         ~/go/pkg/mod
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4  # Updated to latest stable version
 
-      - name: Set up Go
+      - name: Set Up Go
         uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go-version }}
+          check-latest: true  # Ensures the latest patch version is used
 
       - name: Cache Go Modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4  # Updated to latest stable version
         with:
           path: ${{ env.CACHE_PATHS }}
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
+          key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-go-${{ matrix.go-version }}-
 
-      - name: Install Dependencies
+      - name: Install and Verify Dependencies
         run: |
           go mod tidy
           go mod download
-          go list -m all  # Ensure dependencies are correctly resolved
 
-      - name: Verify Go Environment
+      - name: Lint Code
         run: |
-          go version
-          go env
+          go fmt ./...
+          go vet ./...
+        continue-on-error: false  # Fail the job if linting fails
 
-      - name: Check Code Formatting
-        run: go fmt ./...
+      - name: Run Unit Tests
+        run: go test -v -race ./...  # Added -race to detect data races
 
-      - name: Run Vet (Static Analysis)
-        run: go vet ./...
-
-      - name: Run Tests
-        run: go test -v ./...
-
-      - name: Update protobuf
-        run: |
-          chmod +x ./scripts/update_protobuf.sh
-          ./scripts/update_protobuf.sh
+      - name: Update Protobuf Files
+        run: ./scripts/update_protobuf.sh
         shell: bash
 
-      - name: Commit and push changes
+      - name: Commit and Push Changes
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'  # Only on main push
         run: |
-          git config --global user.name "ngdangkietse"
-          git config --global user.email "kietnguyen17052001@gmail.com"
-          if [ -n "$(git status -s)" ]; then
-            git status
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git status --porcelain | grep .; then
             git add .
-            git commit -m "chore: regenerate files"
+            git commit -m "chore: regenerate protobuf files [skip ci]"
             git pull --rebase origin main
             git push origin main
           else
