@@ -8,6 +8,7 @@ require (
 	entgo.io/ent v0.14.1
 	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/google/uuid v1.6.0
+	github.com/ngdangkietswe/swe-protobuf-shared v0.0.0-20250220162907-f389363fc532
 	github.com/redis/go-redis/v9 v9.7.0
 	github.com/samber/lo v1.47.0
 	github.com/spf13/viper v1.19.0
