@@ -29,6 +29,7 @@ func NormalizePageable(pageable *common.Pageable) *common.Pageable {
 		Size:      AsPageSize(pageable.Size),
 		Sort:      AsSort(pageable.Sort),
 		Direction: AsOrder(pageable.Direction),
+		UnPaged:   pageable.UnPaged,
 	}
 }
 
