@@ -77,8 +77,8 @@ github.com/microsoftgraph/msgraph-sdk-go-core v1.2.1 h1:P1wpmn3xxfPMFJHg+PJPcusE
 github.com/microsoftgraph/msgraph-sdk-go-core v1.2.1/go.mod h1:vFmWQGWyLlhxCESNLv61vlE4qesBU+eWmEVH7DJSESA=
 github.com/mitchellh/mapstructure v1.5.0 h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=
 github.com/mitchellh/mapstructure v1.5.0/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=
-github.com/ngdangkietswe/swe-protobuf-shared v0.0.0-20250223061722-d93517b624ad h1:UsnlFQlYTu7zgkev0LFyTwXCthcBra6U5vElAXbYXIk=
-github.com/ngdangkietswe/swe-protobuf-shared v0.0.0-20250223061722-d93517b624ad/go.mod h1:BJM2Kr7cIUwRc8lpRIlIC1T4diAlfr8ryVOV+NT5A5U=
+github.com/ngdangkietswe/swe-protobuf-shared v0.0.0-20250227113454-7c4f156f3a57 h1:c5h4u9NY46kg1uygLfINgW2gG0Qwww/hwVBrDhIewHA=
+github.com/ngdangkietswe/swe-protobuf-shared v0.0.0-20250227113454-7c4f156f3a57/go.mod h1:BJM2Kr7cIUwRc8lpRIlIC1T4diAlfr8ryVOV+NT5A5U=
 github.com/pelletier/go-toml/v2 v2.2.2 h1:aYUidT7k73Pcl9nb2gScu7NSrKCSHIDE89b3+6Wq+LM=
 github.com/pelletier/go-toml/v2 v2.2.2/go.mod h1:1t835xjRzz80PqgE6HHgN2JOsmgYu/h4qDAS4n929Rs=
 github.com/pierrec/lz4/v4 v4.1.15 h1:MO0/ucJhngq7299dKLwIMtgTfbkoSPF6AoMYDd8Q4q0=
