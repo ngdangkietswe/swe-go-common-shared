@@ -12,7 +12,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/microsoft/kiota-authentication-azure-go v1.1.0
 	github.com/microsoftgraph/msgraph-sdk-go v1.62.0
-	github.com/ngdangkietswe/swe-protobuf-shared v0.0.0-20250223061722-d93517b624ad
+	github.com/ngdangkietswe/swe-protobuf-shared v0.0.0-20250227113454-7c4f156f3a57
 	github.com/redis/go-redis/v9 v9.7.0
 	github.com/samber/lo v1.47.0
 	github.com/segmentio/kafka-go v0.4.47
