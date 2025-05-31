@@ -87,6 +87,11 @@ func (l *Logger) Info(msg string, fields ...zap.Field) {
 	l.instance.Info(msg, fields...)
 }
 
+// Warn logs a warning-level message.
+func (l *Logger) Warn(msg string, fields ...zap.Field) {
+	l.instance.Warn(msg, fields...)
+}
+
 // Error logs an error-level message.
 func (l *Logger) Error(msg string, fields ...zap.Field) {
 	l.instance.Error(msg, fields...)
